@@ -19,7 +19,6 @@ public class Log {
 	private String message;
 
 	@CreationTimestamp
-	@Column(name="timestamp", nullable = false, updatable = false, insertable = false)
     private LocalDateTime timestamp;
 
 	public Long getId() {
