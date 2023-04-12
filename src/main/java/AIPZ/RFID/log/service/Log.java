@@ -2,8 +2,9 @@ package AIPZ.RFID.log.service;
 
 import java.time.LocalDateTime;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +17,9 @@ public class Log {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String message;
-	@CreatedDate
+
+	@CreationTimestamp
+	@Column(name="timestamp", nullable = false, updatable = false, insertable = false)
     private LocalDateTime timestamp;
 
 	public Long getId() {
