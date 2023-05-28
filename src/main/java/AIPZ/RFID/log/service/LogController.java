@@ -37,6 +37,11 @@ public class LogController {
 
 	@GetMapping("/new/card/{cardId}")
 	public boolean addNewCard(@PathVariable String cardId) {
+		
+		if(cardRepository.findByCardId(cardId) != null) {
+			return false;
+		}
+		
 		Card c = new Card();
 		c.setCardId(cardId);
 		return cardRepository.save(c) != null;
@@ -44,7 +49,7 @@ public class LogController {
 	
 	@GetMapping("/check/card/{cardId}")
 	public boolean checkCard(@PathVariable String cardId) {
-		return cardRepository.findByCardId("Filip") != null;
+		return cardRepository.findByCardId(cardId) != null;
 	}
 	
 }
