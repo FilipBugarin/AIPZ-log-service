@@ -14,21 +14,37 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/logs")
 public class LogController {
 
-   @Autowired
-   private LogRepository logRepository;
+	@Autowired
+	private LogRepository logRepository;
 
-   @PostMapping
-   public Log addLog(@RequestBody Log log) {
-      return logRepository.save(log);
-   }
+	@Autowired
+	private CardRepository cardRepository;
 
-   @GetMapping
-   public List<Log> getAllLogs() {
-      return logRepository.findAll();
-   }
-   
-   @GetMapping("/access/{password}")
-   public boolean getAccess(@PathVariable String password) {
-      return password.equals("Filip");
-   }
+	@PostMapping
+	public Log addLog(@RequestBody Log log) {
+		return logRepository.save(log);
+	}
+
+	@GetMapping
+	public List<Log> getAllLogs() {
+		return logRepository.findAll();
+	}
+
+	@GetMapping("/access/{password}")
+	public boolean getAccess(@PathVariable String password) {
+		return password.equals("Filip");
+	}
+
+	@GetMapping("/new/card/{cardId}")
+	public boolean addNewCard(@PathVariable String cardId) {
+		Card c = new Card();
+		c.setCardId(cardId);
+		return cardRepository.save(c) != null;
+	}
+	
+	@GetMapping("/check/card{cardId}")
+	public boolean checkCard(@PathVariable String cardId) {
+		return cardRepository.findByCardId("Filip") != null;
+	}
+	
 }
