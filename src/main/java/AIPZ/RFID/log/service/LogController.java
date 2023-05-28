@@ -42,7 +42,7 @@ public class LogController {
 		return cardRepository.save(c) != null;
 	}
 	
-	@GetMapping("/check/card{cardId}")
+	@GetMapping("/check/card/{cardId}")
 	public boolean checkCard(@PathVariable String cardId) {
 		return cardRepository.findByCardId("Filip") != null;
 	}
