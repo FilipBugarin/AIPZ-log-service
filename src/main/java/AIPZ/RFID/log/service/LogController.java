@@ -30,25 +30,29 @@ public class LogController {
 		return logRepository.findAll();
 	}
 
-	@GetMapping("/access/{password}")
-	public boolean getAccess(@PathVariable String password) {
-		return password.equals("Filip");
-	}
-
 	@GetMapping("/new/card/{cardId}")
 	public boolean addNewCard(@PathVariable String cardId) {
 		
+		Log l= new Log();
+		l.setMessage("Registering new card");
+		
 		if(cardRepository.findByCardId(cardId) != null) {
+			l.setMessage("Card already registered with id:" + cardId);
 			return false;
 		}
 		
 		Card c = new Card();
 		c.setCardId(cardId);
+		l.setMessage("Card registered:" + cardId);
+		logRepository.save(l);
 		return cardRepository.save(c) != null;
 	}
 	
 	@GetMapping("/check/card/{cardId}")
 	public boolean checkCard(@PathVariable String cardId) {
+		Log l= new Log();
+		l.setMessage("Reqiested access wiht card id:" + cardId);
+		logRepository.save(l);
 		return cardRepository.findByCardId(cardId) != null;
 	}
 	
