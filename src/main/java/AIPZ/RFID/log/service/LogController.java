@@ -56,4 +56,9 @@ public class LogController {
 		return cardRepository.findByCardId(cardId) != null;
 	}
 	
+	@GetMapping("/delete")
+	public void delete() {
+		cardRepository.deleteAll();
+	}
+	
 }
